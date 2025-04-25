@@ -1,122 +1,118 @@
 # ZREX GramEm: AI-Powered Grammar and Sentiment Enhancement API
 
-## **1. Introduction**  
-GramEm is an advanced text processing API that corrects grammar and spelling errors while enhancing text with sentiment-based emoji suggestions. The system is designed for developers and businesses seeking an intelligent language enhancement tool that operates efficiently in an offline environment.
-
-### **1.1 Purpose**  
-The primary objectives of GramEm are:  
-- To provide automated grammar and spelling correction using deep learning models.  
-- To analyze sentiment in text and enhance user expression with appropriate emojis.  
-- To operate without reliance on external blockchain infrastructure for full offline functionality.  
+GramEm is an intelligent text-enhancement tool that not only corrects grammar using a T5 transformer but also analyzes sentence emotions using a BERT-based model. It then adds relevant emojis to match the sentiment of the text—bringing more life and personality to user messages.
 
 ---
 ![GramEm](https://github.com/user-attachments/assets/881aab86-5379-424b-8d26-57bea44cad04)
 ---
-## **2. Technologies Used**  
+## Features
 
-### **2.1 Programming Languages & Frameworks**  
-- **Python** – Core programming language  
-- **Flask** – Web framework for API development  
-
-### **2.2 Machine Learning Models**  
-- **T5ForConditionalGeneration** – Grammar correction model  
-- **BERT (GoEmotions)** – Sentiment analysis model  
-
-### **2.3 Supporting Libraries**  
-- **SpellChecker** – Spelling correction  
-- **Regular Expressions (re)** – Text preprocessing  
-- **Torch** – Deep learning framework  
+- Grammar correction using T5 Transformer.
+- Emotion classification using BERT (Happy, Sad, Angry, etc.).
+- Emoji injection based on emotion context.
+- Easy to run in Docker for consistent environments.
 
 ---
 
-## **3. Installation and Setup**  
+## Project Structure
 
-### **3.1 System Requirements**  
-- **Python version**: 3.8 or later  
-- **Operating System**: Windows, macOS, or Linux  
-- **Memory**: Minimum 4GB RAM (Recommended: 8GB)  
+```
+├── GramE - Emotion Classification Model (BERT).ipynb
+├── GramEm - Grammar Correction Model (T5).ipynb
+├── requirements.txt
+├── Dockerfile
+└── README.md
+```
 
-### **3.2 Dependency Installation**  
-Before running the application, install all required dependencies using the following command:
+---
 
+## Installation (Local)
+
+1. **Clone the Repository**
 ```bash
-pip install flask transformers torch regex spellchecker
+git clone https://github.com/your-username/GramEm.git
+cd GramEm
 ```
 
----
-
-## **4. Running the Application**  
-
-### **4.1 Local Execution**  
-To run the API locally, execute:
-
+2. **Install Dependencies**
 ```bash
-python GramEm.py
+pip install -r requirements.txt
 ```
 
-By default, the API will be available at:  
-**http://127.0.0.1:8000/process**
-
----
-
-## **5. Deploying with Docker**  
-
-### **5.1 Creating the Docker Image**  
-
-Build the Docker image using the following command:
-
+3. **Run the Notebooks**
+Open both notebooks using Jupyter:
 ```bash
-docker build -t gramem-api .
+jupyter notebook
 ```
 
-### **5.2 Running the Docker Container**  
-Execute the following command to run the API inside a Docker container:
+---
 
+## Running with Docker
+
+### Build the Docker image
 ```bash
-docker run -d -p 8000:8000 --name gramem-container gramem-app
+docker build -t gramem .
 ```
 
-The API will now be accessible at:  
-**http://localhost:8000/process**
+### Run the container
+```bash
+docker run -p 8888:8888 gramem
+```
+
+Then open the link provided in your terminal (e.g., `http://127.0.0.1:8888/?token=...`) to access the Jupyter notebooks in your browser.
 
 ---
 
-## **6. API Usage**  
+## Requirements
 
-### **6.1 Endpoint**  
-**POST /process**  
+- Python 3.8+
+- Transformers
+- Torch
+- Scikit-learn
+- Jupyter
+- Emoji
+- TextBlob
 
-### **6.2 Request Format**  
-The API expects a JSON payload with the following structure:
+Make sure to have a `requirements.txt` with the following:
 
-```json
-{
-  "text": "i'm exicited",
-  "username": "test_user"
-}
+```
+transformers
+torch
+scikit-learn
+emoji
+textblob
+jupyter
 ```
 
-### **6.3 Response Format**  
-Upon successful processing, the API will return a response in the following format:
+### Dockerfile
 
-```json
-{
-  "Original Text": "i'm exicited",
-  "GramEm Text": " I'm excited. 🤩",
-  "Hive Post Url": "Hive posting is currently disabled (offline mode)."
-}
+```dockerfile
+# Use an official lightweight Python image
+FROM python:3.10-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy project files
+COPY . /app
+
+# Install required system packages
+RUN apt-get update && apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose Jupyter Notebook port
+EXPOSE 8888
+
+# Run Jupyter Notebook
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
 ```
 
 ---
 
-## **7. Additional Notes**  
-- This version operates in **offline mode**, with no blockchain connectivity.  
-- The emoji mappings are configurable in `Mapping.py`.  
-- Docker deployment is recommended for production environments.  
-
----
-
-## **8. Contribution Guidelines**  
+## **Contribution Guidelines**  
 Contributions are welcome. To contribute:  
 1. Fork the repository.  
 2. Create a feature branch.  
@@ -125,6 +121,12 @@ Contributions are welcome. To contribute:
 
 ---
 
-## **9. License**  
-This project is licensed under the **MIT License**.  
+## License
 
+MIT License
+
+---
+
+Built by `S A M` – Bringing emotion and intelligence to text.
+
+---
