@@ -1,4 +1,4 @@
-# ZREX GramEm: AI-Powered Grammar and Sentiment Enhancement API
+# ZREX GramEm: Grammar and Sentiment Enhancement API
 
 ## **1. Introduction**  
 GramEm is an advanced text processing API that corrects grammar and spelling errors while enhancing text with sentiment-based emoji suggestions. The system is designed for developers and businesses seeking an intelligent language enhancement tool that operates efficiently in an offline environment.
