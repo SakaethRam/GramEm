@@ -1,4 +1,4 @@
-# ZREX GramEm: Grammar and Sentiment Enhancement API
+# GramEm: Grammar and Sentiment Enhancement API
 
 GramEm is an intelligent text-enhancement tool that not only corrects grammar using a T5 transformer but also analyzes sentence emotions using a BERT-based model. It then adds relevant emojis to match the sentiment of the text - bringing more life and personality to user messages.
 
@@ -118,12 +118,6 @@ Contributions are welcome. To contribute:
 2. Create a feature branch.  
 3. Implement your changes.  
 4. Submit a pull request with a clear description of modifications.  
-
----
-
-## License
-
-MIT License
 
 ---
 
