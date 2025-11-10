@@ -1,48 +1,147 @@
-# GramEm: Grammar and Sentiment Enhancement API
+# GramEm Engine: Messaging -> AI Messageing 
 
-GramEm is an intelligent text-enhancement tool that not only corrects grammar using a T5 transformer but also analyzes sentence emotions using a BERT-based model. It then adds relevant emojis to match the sentiment of the text - bringing more life and personality to user messages.
+**The world's first inline AI tone-trigger engine.**  
+Type `{Formal}`, `{Casual, Emojis}`, `{Casual, Emojis, Translate}`, or `{Phrase: Professional}`, GramEm Engine instantly rephrases, completes (auto-phrases), and translates your text.  
+Available as Chrome extension, desktop widget, and API || Powered By ARKIN X ENGINE
 
 ---
 ![GramEm](https://github.com/user-attachments/assets/881aab86-5379-424b-8d26-57bea44cad04)
 ---
+
+---
+
+## GramEm Engine Tiers Comparison
+
+
+| Feature                          | **Basic** | **Premium** | **Advance** |
+|----------------------------------|-----------|-------------|-------------|
+| **LOC (approx)**                 | ~380      | ~510        | ~570        |
+| `{Tone}` (Formal, Casual, etc.)  | Yes       | Yes         | Yes         |
+| `{Tone, Emojis}`                 | No        | Yes         | Yes         |
+| `{Tone, Translate}`              | No        | Yes         | Yes         |
+| `Context ("Role=..., Company=...")` | No     | Yes         | Yes         |
+| `{Phrase: Tone}` (Auto-complete) | No        | No          | Yes         |
+| **Job Application Mode**         | No        | Yes         | Yes         |
+| **Greeting Logic**               | No        | Yes         | Yes         |
+| **Two-Step Translation Pipeline**| No        | Yes         | Yes         |
+| **UI**                           | Modal     | Inline Popup| Modal       |
+| **Debounce**                     | 600ms     | 500ms       | 600ms       |
+| **Site Restriction**             | Yes       | Yes         | Yes         |
+| **Encrypted API Key**            | Yes       | Yes         | Yes         |
+
+---
+
 ## Features
 
-- Grammar correction using T5 Transformer.
-- Emotion classification using BERT (Happy, Sad, Angry, etc.).
-- Emoji injection based on emotion context.
-- Easy to run in Docker for consistent environments.
+GramEm is a **secure, intelligent, context-aware writing co-pilot** with **zero external dependencies** beyond encrypted Gemini API.
+
+### Core Innovations
+- **Trigger Syntax**: `{Tone}`, `{Tone, Emojis}`, `{Tone, Translate}`, `{Phrase: Tone}`
+- **Auto-Complete Engine**: `{Phrase: Professional}` → expands incomplete thoughts
+- **Context Parsing**: `"Role=Engineer, Company=Google"` → generates tailored emails
+- **Smart Emoji Placement**: Tone-aware, contextual, never spammy
+
+### Security & Privacy
+- **AES-GCM Encrypted API Key** with PBKDF2-derived keys
+- **Default Password**: `GramEm` (user-changeable)
+- **Decryption at Runtime Only** — never stored in memory
+- **Site Whitelisting**: Works only on Gmail, WhatsApp Web, Outlook
+
+### UI/UX
+- **Draggable Floating Action Button** (double-click to drag)
+- **Smart Modal Positioning** (above/below based on viewport)
+- **Inline Popup (Premium)** for faster interaction
+- **Replace / Copy / Close** actions with hover effects
+
+### Input Handling
+- Listens to `input`, `keyup` on `textarea`, `input`, `contenteditable`
+- **Debounce**: 600ms (Basic/Advance), 500ms (Premium)
+- **Language Detection**: Lightweight English keyword regex
+
+### Prompt Engineering
+- **Strict Output Rules**:
+  - No greetings unless in input
+  - No exclamation marks
+  - No emojis unless requested
+  - Preserve question structure
+- **Job Mode**: Auto-adds `Dear Hiring Manager,`
+- **Completion Mode**: Uses `"Complete"` prefix instead of `"Rephrase"`
+
+### Error Resilience
+- Graceful handling of:
+  - Decryption failure
+  - API timeout / invalid response
+  - Malformed context
+  - Unsupported syntax
+
+### Performance
+- **Zero bundle bloat** — only essential code
+- **No external libraries**
+- **Fast cold-start** — activates in <100ms
 
 ---
 
 ## Project Structure
 
 ```
-├── GramE - Emotion Classification Model (BERT).ipynb
-├── GramEm - Grammar Correction Model (T5).ipynb
-├── requirements.txt
-├── Dockerfile
-└── README.md
+gramem-basic/
+├── .github/
+│   ├── workflows/
+│   │   └── test.yml
+│   └── ISSUE_TEMPLATE/
+│       ├── bug_report.md
+│       └── feature_request.md
+├── docs/
+│   ├── index.md
+│   ├── api.md
+│   └── examples.md
+├── examples/
+│   └── cli_demo.py
+├── tests/
+│   └── test_core.py
+├── gramem_basic/
+│   ├── __init__.py
+│   ├── core.py
+│   ├── cli.py
+│   └── __main__.py
+├── GramEm.html
+├── LICENSE
+├── .gitignore
+├── pyproject.toml
+├── README.md
+├── CODE_OF_CONDUCT.md
+└── CHANGELOG.md
 ```
 
 ---
 
 ## Installation (Local)
 
-1. **Clone the Repository**
+1. **Install from Source (Developers)**
 ```bash
 git clone "https://github.com/SakaethRam/GramEm.git"
-cd GramEm
+cd gramem-basic
+pip install .
 ```
+>Enables editing, forking, and extending.
 
-2. **Install Dependencies**
+2. **Install via pip (Recommended)**
 ```bash
-pip install -r requirements.txt
+pip install gramem-basic
 ```
+>Installs the open-source {TONE TYPE} engine in <2 seconds.
 
-3. **Run the Notebooks**
-Open both notebooks using Jupyter:
+3. **Python API Usage**
 ```bash
-jupyter notebook
+>>> from gramem_basic import rephrase, ToneEngine
+
+>>> rephrase("Hey {Casual}")
+'Hey! How\'s it going? GRAMEM ENGINE'
+
+>>> engine = ToneEngine()
+>>> engine.add_tone("Pirate", {"hello": "ahoy"})
+>>> engine.rephrase("hello {Pirate}")
+'Ahoy. GRAMEM ENGINE'
 ```
 
 ---
@@ -51,63 +150,46 @@ jupyter notebook
 
 ### Build the Docker image
 ```bash
-docker build -t gramem .
+cd gramem-basic  # Your project root
+docker build -t gramem-basic:latest .
 ```
-
-### Run the container
-```bash
-docker run -p 8888:8888 gramem
-```
-
-Then open the link provided in your terminal (e.g., `http://127.0.0.1:8888/?token=...`) to access the Jupyter notebooks in your browser.
 
 ---
-
-## Requirements
-
-- Python 3.8+
-- Transformers
-- Torch
-- Scikit-learn
-- Jupyter
-- Emoji
-- TextBlob
-
-Make sure to have a `requirements.txt` with the following:
-
-```
-transformers
-torch
-scikit-learn
-emoji
-textblob
-jupyter
-```
 
 ### Dockerfile
 
 ```dockerfile
-# Use an official lightweight Python image
-FROM python:3.10-slim
+# gramem-basic/Dockerfile
+# Official Docker image for GramEm Basic - Open-Source {TONE TYPE} Engine
+# Runs CLI demo by default; extend for custom apps
 
-# Set working directory
+FROM python:3.11-slim
+
+# Set metadata
+LABEL maintainer="GramEm Team <hello@gramem.dev>"
+LABEL version="0.2.0"
+LABEL description="Open-source core of GramEm Engine: {TONE TYPE} trigger command parser"
+
+# Install system dependencies (minimal)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python package
+RUN pip install --no-cache-dir gramem-basic
+
+# Create app directory
 WORKDIR /app
 
-# Copy project files
-COPY . /app
+# Copy entrypoint script
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-# Install required system packages
-RUN apt-get update && apt-get install -y git && \
-    rm -rf /var/lib/apt/lists/*
+# Expose port (for API extensions)
+EXPOSE 8080
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose Jupyter Notebook port
-EXPOSE 8888
-
-# Run Jupyter Notebook
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+# Run interactive CLI demo by default
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["python", "-c", "from gramem_basic.examples.cli_demo import *; main()"]
 ```
 
 ---
