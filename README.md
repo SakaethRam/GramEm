@@ -203,5 +203,5 @@ Contributions are welcome. To contribute:
 
 ---
 
-Built by `S A M` – Bringing emotion and intelligence to text.
+Built by `S A M` – Bringing emotion and intelligence to message.
 
