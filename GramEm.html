@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>GramEm Engine Demo</title>
+<style>body{font-family:system-ui;background:#1e1e1e;color:#fff;padding:20px}
+.container{max-width:600px;margin:auto}
+.icon{width:60px;height:60px;background:#4CAF50;color:#fff;font-weight:bold;font-size:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;float:left;margin-right:15px;cursor:pointer}
+textarea{width:100%;height:180px;background:#2d2d2d;color:#fff;border:1px solid #444;border-radius:8px;padding:12px;font-size:16px;margin-top:80px}
+.result{margin-top:15px;font-size:18px;color:#4CAF50}</style></head>
+<body><div class="container">
+<div class="icon" onclick="document.getElementById('i').focus()">G</div>
+<h2>GramEm Basic – Live Demo</h2>
+<p>Type <code>{Formal}</code>, <code>{Casual}</code>...</p>
+<textarea id="i" placeholder="Hello {Formal}">Hello {Formal}</textarea>
+<div class="result" id="o"></div>
+</div>
+<script>
+const T={Formal:{hello:"Dear Sir/Madam,",hi:"Dear Sir/Madam,",hey:"Dear Sir/Madam,"},
+Casual:{hello:"Hey!",hi:"Hey!",hey:"Hey!"},
+Professional:{hello:"Hello,",hi:"Hello,",hey:"Hello,"},
+Friendly:{hello:"Hi there!",hi:"Hi!",hey:"Hey friend!"}};
+function r(t){const m=t.match(/(.*)\{(\s*(Formal|Professional|Casual|Friendly)\s*)\}/i);if(!m)return null;const[_,msg,tone]=m;const map=T[tone];return msg.toLowerCase().split(/\s+/).map(w=>map[w.replace(/[^\w]/g,'')]||w).join(' ').replace(/^\w/,c=>c.toUpperCase())+(msg.match(/[.!?]$/)?'':'.')+' GRAMEM ENGINE';}
+const i=document.getElementById('i'),o=document.getElementById('o');let tm;
+i.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{const l=i.value.trim().split('\n').pop();const res=r(l);o.textContent=res?`→ ${res}`:'Tip: Use {Formal}, etc.';},600);});
+setTimeout(()=>i.dispatchEvent(new Event('input')),100);
+</script></body></html>
