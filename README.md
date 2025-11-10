@@ -1,4 +1,4 @@
-# GramEm Engine: Messaging -> AI Messageing 
+# GramEm Engine: Messaging -> Smart Messageing 
 
 **The world's first inline AI tone-trigger engine.**  
 Type `{Formal}`, `{Casual, Emojis}`, `{Casual, Emojis, Translate}`, or `{Phrase: Professional}`, GramEm Engine instantly rephrases, completes (auto-phrases), and translates your text.  
