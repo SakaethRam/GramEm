@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gramem-basic"
+version = "0.2.0"
+description = "Open-source core of GramEm Engine: {TONE TYPE} trigger command parser"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [{name = "GramEm Team", email = "hello@gramem.dev"}]
+keywords = ["rephrasing", "tone", "trigger", "parser", "ai", "nlp"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/gramem/gramem-basic"
+Repository = "https://github.com/gramem/gramem-basic"
+
+[project.scripts]
+gramem = "gramem_basic.cli:main"
+
+[options.extras_require]
+test = "pytest"
